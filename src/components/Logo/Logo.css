@@ -1,0 +1,10 @@
+.Tilt {
+	background: linear-gradient(89deg, #04C8DE, #FF5EDF);
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+.Tilt img {
+	object-fit: cover;
+	width: 75%;
+}

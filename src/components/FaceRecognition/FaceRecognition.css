@@ -1,0 +1,13 @@
+.FaceRecognition {
+	padding: 1rem;
+}
+.FaceRecognition span {
+	font-size: .75rem;
+}
+.FaceRecognition img {
+	margin: 1rem;
+	max-width: 100%;
+}
+#examplePhoto {
+	cursor: pointer;
+}
