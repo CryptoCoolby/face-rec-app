@@ -47,6 +47,9 @@ class App extends Component {
 		const image = $('#faceImage')[0]
 		const width = image.width * 1
 		const height = image.height * 1
+		console.log('Boxes', boxes)
+		console.log('Width', width, 'Height', height)
+		console.log('Image element', image)
 		return boxes.map((box) => ({
 			leftCol: box.left_col * width,
 			topRow: box.top_row * height,
@@ -54,7 +57,7 @@ class App extends Component {
 			bottomRow: height - (box.bottom_row *height)
 		}))
 	}
-	displayFaceBoxes = (boxes) =>{
+	displayFaceBoxes (boxes) {
 		this.setState({ boxes })
 	}
 	onInputChange = (event) => {
@@ -65,7 +68,7 @@ class App extends Component {
 			.then(response => {
 				const boxes = response.outputs[0].data.regions
 				this.setState({ imageUrl: this.state.input, faceScore: 0, isValidUrl: true })
-				if (boxes) this.displayFaceBoxes(this.calculateFaceLocation(boxes))
+				if (boxes) this.setState(this.displayFaceBoxes(this.calculateFaceLocation(boxes)))
 			}, () => {
 			this.setState({ isValidUrl: false })
 			}

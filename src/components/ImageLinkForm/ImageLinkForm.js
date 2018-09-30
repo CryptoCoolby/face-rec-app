@@ -14,7 +14,7 @@ const ImageLinkForm = ({ onInputChange, onDetectSubmit }) => {
 	return (
 		<div>
 			<p className='f3 app-description'>
-				<strong>{'Our Smart Assistant will help you detect faces in your photos. Give it a try!'}</strong>
+				<strong>{'Show our Robot-Friend the picture with the most faces on it to rank up!'}</strong>
 			</p>
 			<div className='center'>
 				<div className='center photo-form pa4 br3 shadow-5 mb3'>

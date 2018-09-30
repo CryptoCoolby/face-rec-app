@@ -4,9 +4,24 @@
 .FaceRecognition span {
 	font-size: .75rem;
 }
+.FaceRecognition > div {
+	position: relative;
+}
 .FaceRecognition img {
 	margin: 1rem;
 	max-width: 100%;
+}
+.boundingBox {
+	position: absolute;
+	box-shadow: 0 0 0 3px rgba(20,157,242, .5) inset;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	cursor: pointer;
+}
+.boundingBox:hover {
+	box-shadow: 0 0 0 3px rgba(20,157,242, 1) inset;
+
 }
 #examplePhoto {
 	cursor: pointer;
