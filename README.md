@@ -1,4 +1,4 @@
-## See the project on gh-pages [here](http://cryptocoolby.github.io/space-heroes).
+## See the project on gh-pages [here](http://cryptocoolby.github.io/face-rec-app).
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
