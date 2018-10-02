@@ -4,7 +4,7 @@ import './FaceRecognition.css'
 const FaceRecognition = ({ imageUrl, faceScore, isValidUrl, boxes }) => {
 	return isValidUrl ?
 	(
-		<div className='FaceRecognitionr'>
+		<div className='FaceRecognition'>
 			<span>Face detection score: {faceScore}</span>
 			<div className='FaceRecognition center'>
 				<div className=''>

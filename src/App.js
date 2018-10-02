@@ -3,8 +3,9 @@ import Particles from 'react-particles-js'
 import Clarifai from 'clarifai'
 import $ from 'jquery'
 import apiKey from './apiKey'
-import Navigation from './components/Navigation/Navigation'
-import Logo from './components/Logo/Logo'
+import Signin from './components/User/Signin'
+import Signup from './components/User/Signup'
+import Header from './components/Header/Header'
 import Rank from './components/Rank/Rank'
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm'
 import FaceRecognition from './components/FaceRecognition/FaceRecognition'
@@ -14,17 +15,15 @@ const app = new Clarifai.App({apiKey})
 const particlesParams = {
 	particles: {
 		number: {
-			value: 40,
+			value: 30,
 			density: {
 				enable: true,
-				value_area: 3000
+				value_area: 1000
 			}
 		},
 		line_linked: {
 			shadow: {
-				enable: true,
-				color: "#3CA9D1",
-				blur: 5
+				enable: false
 			}
 		}
 	}
@@ -38,7 +37,9 @@ class App extends Component {
 			imageUrl: '',
 			boxes: [],
 			faceScore: 0,
-			isValidUrl: false
+			isValidUrl: false,
+			route: 'signin',
+			isSignedIn: false
 		}
 	}
 	calculateFaceLocation = (boxes) => {
@@ -68,11 +69,16 @@ class App extends Component {
 			.then(response => {
 				const boxes = response.outputs[0].data.regions
 				this.setState({ imageUrl: this.state.input, faceScore: 0, isValidUrl: true })
-				if (boxes) this.setState(this.displayFaceBoxes(this.calculateFaceLocation(boxes)))
+				if (boxes) this.displayFaceBoxes(this.calculateFaceLocation(boxes))
 			}, () => {
 			this.setState({ isValidUrl: false })
 			}
 		)
+	}
+	onRouteChange = (route) => {
+		this.setState({ route })
+		if (route === 'home') this.setState({ isSignedIn: true })
+		else this.setState({ isSignedIn: false })
 	}
 	render() {
 		return (
@@ -80,19 +86,41 @@ class App extends Component {
 			<Particles
 				params={particlesParams}
 				className='Particles'
-				/>
-			<Navigation />
-			<Logo />
-			<Rank />
-			<ImageLinkForm onInputChange={this.onInputChange} onDetectSubmit={this.onDetectSubmit} />
-			<FaceRecognition
-				boxes={this.state.boxes}
-				imageUrl={this.state.imageUrl}
-				faceScore={this.state.faceScore}
-				isValidUrl={this.state.isValidUrl}
 			/>
+			<Header
+				onRouteChange={this.onRouteChange}
+				isSignedIn={this.state.isSignedIn}
+				route={this.state.route}
+			/>
+			<div>
+				{renderRoute(this)}
+			</div>
 		</div>
 		)
+	}
+}
+
+const renderRoute = (This) => {
+	switch (This.state.route) {
+		case 'home':
+			return (
+				<div>
+					<Rank />
+					<ImageLinkForm
+						onInputChange={This.onInputChange} onDetectSubmit={This.onDetectSubmit}
+					/>
+					<FaceRecognition
+						boxes={This.state.boxes}
+						imageUrl={This.state.imageUrl}
+						faceScore={This.state.faceScore}
+						isValidUrl={This.state.isValidUrl}
+					/>
+				</div>
+			)
+		case 'signup':
+			return <Signup onRouteChange={This.onRouteChange} />
+		default:
+			return <Signin onRouteChange={This.onRouteChange} />
 	}
 }
 

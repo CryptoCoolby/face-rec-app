@@ -9,7 +9,7 @@
 }
 .FaceRecognition img {
 	margin: 1rem;
-	max-width: 100%;
+	max-width: 90vw;
 }
 .boundingBox {
 	position: absolute;
